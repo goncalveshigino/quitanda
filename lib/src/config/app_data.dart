@@ -57,3 +57,11 @@ List<ItemModel> items = [
   mango,
   papaya,
 ];
+
+List<String> categories = [
+  'Frutas',
+  'Grãos',
+  'Verduras',
+  'Temperos',
+  'Cereais',
+];
