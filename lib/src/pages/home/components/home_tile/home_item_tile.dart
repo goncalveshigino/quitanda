@@ -24,9 +24,12 @@ class HomeItemTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-                child: Image.asset(
-              'assets/fruits/apple.png',
-            )),
+              child: Image.asset(
+                item.imgUrl,
+                width: 100.0,
+                height: 100.0,
+              ),
+            ),
             Text(
               item.itemName,
               style: const TextStyle(

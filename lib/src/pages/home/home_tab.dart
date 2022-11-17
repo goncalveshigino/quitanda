@@ -7,13 +7,16 @@ import 'package:quitanda/src/pages/home/components/home_tile/home_item_tile.dart
 import 'components/home_tile/categoria_tile.dart';
 
 class HomeTab extends StatefulWidget {
+
   const HomeTab({Key? key}) : super(key: key);
 
   @override
   State<HomeTab> createState() => _HomeTabState();
+
 }
 
 class _HomeTabState extends State<HomeTab> {
+  
   String selectedCategory = 'Frutas';
 
   @override
@@ -68,6 +71,7 @@ class _HomeTabState extends State<HomeTab> {
 
       body: Column(
         children: [
+
           //Campo de pesquisa
           Padding(
             padding: const EdgeInsets.symmetric(
