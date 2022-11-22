@@ -5,11 +5,20 @@ import 'package:quitanda/src/services/utils_services.dart';
 import '../../models/item_model.dart';
 import '../common_widgets/quantity_widget.dart';
 
-class ProsuctScreen extends StatelessWidget {
+class ProsuctScreen extends StatefulWidget {
+
   final ItemModel item;
-  final UtilsServices utilsServices = UtilsServices();
 
   ProsuctScreen({Key? key, required this.item}) : super(key: key);
+
+  @override
+  State<ProsuctScreen> createState() => _ProsuctScreenState();
+}
+
+class _ProsuctScreenState extends State<ProsuctScreen> {
+  final UtilsServices utilsServices = UtilsServices();
+
+  int cartItemQuantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +30,9 @@ class ProsuctScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Hero(
-                  tag: item.imgUrl,
-                  child: Image.asset(item.imgUrl),),
+                  tag: widget.item.imgUrl,
+                  child: Image.asset(widget.item.imgUrl),
+                ),
               ),
               Expanded(
                   child: Container(
@@ -43,13 +53,23 @@ class ProsuctScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(item.itemName, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 27, fontWeight: FontWeight.bold)),
+                        Text(widget.item.itemName, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 27, fontWeight: FontWeight.bold)),
                         const Spacer(),
-                        QauntityWidget()
+                        QauntityWidget(
+                          suffixText: widget.item.unit,
+                          value: cartItemQuantity,
+                          result: (quantity) {
+                    
+                           setState(() {
+                             cartItemQuantity = quantity;
+                           });
+                            
+                          },
+                        )
                       ],
                     ),
                     Text(
-                      utilsServices.priceToCurrency(item.price),
+                      utilsServices.priceToCurrency(widget.item.price),
                       style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: CustomColors.customSwatchColor),
                     ),
                     Expanded(
@@ -57,7 +77,7 @@ class ProsuctScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: SingleChildScrollView(
                           child: Text(
-                            item.description,
+                            widget.item.description,
                             style: const TextStyle(height: 1.5),
                           ),
                         ),
