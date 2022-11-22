@@ -3,6 +3,7 @@ import 'package:quitanda/src/config/custom_colors.dart';
 
 import '../../../../models/item_model.dart';
 import '../../../../services/utils_services.dart';
+import '../../../product/product_screen.dart';
 
 class HomeItemTile extends StatelessWidget {
 
@@ -22,53 +23,62 @@ class HomeItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Card(
-          elevation: 5,
-          shadowColor: Color.fromARGB(255, 75, 27, 27),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: Image.asset(
-                    item.imgUrl,
-                    width: 100.0,
-                    height: 100.0,
-                  ),
-                ),
-                Text(
-                  item.itemName,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                     utilsServices.priceToCurrency( item.price),
-                      style:  TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: CustomColors.customSwatchColor
-                      ),
-                    ),
 
-                    Text('/${item.unit}', style: TextStyle(
-                      color: Colors.grey.shade500,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12
-                    ),)
-                  ],
-                )
-              ],
+        GestureDetector(
+          onTap:(){
+             Navigator.of(context).push(
+              MaterialPageRoute(builder: (c){
+                 return ProsuctScreen(item: item,);
+              }));
+          },
+          child: Card(
+            elevation: 5,
+            shadowColor: Color.fromARGB(255, 75, 27, 27),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: Image.asset(
+                      item.imgUrl,
+                      width: 100.0,
+                      height: 100.0,
+                    ),
+                  ),
+                  Text(
+                    item.itemName,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                       utilsServices.priceToCurrency( item.price),
+                        style:  TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: CustomColors.customSwatchColor
+                        ),
+                      ),
+        
+                      Text('/${item.unit}', style: TextStyle(
+                        color: Colors.grey.shade500,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12
+                      ),)
+                    ],
+                  )
+                ],
+              ),
+            ),
+            
           ),
-          
         ),
 
         Positioned(
