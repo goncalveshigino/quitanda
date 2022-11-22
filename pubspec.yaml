@@ -37,6 +37,7 @@ dependencies:
   animated_text_kit:
   mask_text_input_formatter: ^2.4.0
   badges: ^2.0.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

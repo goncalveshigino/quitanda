@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quitanda/src/config/custom_colors.dart';
 
 import '../../../../models/item_model.dart';
 
@@ -37,6 +38,24 @@ class HomeItemTile extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Row(
+              children: [
+                Text(
+                  item.price.toStringAsFixed(2),
+                  style:  TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: CustomColors.customSwatchColor
+                  ),
+                ),
+
+                Text('/${item.unit}', style: TextStyle(
+                  color: Colors.grey.shade500,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12
+                ),)
+              ],
+            )
           ],
         ),
       ),
