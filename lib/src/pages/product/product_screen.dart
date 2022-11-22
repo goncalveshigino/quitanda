@@ -3,6 +3,7 @@ import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 import '../../models/item_model.dart';
+import '../common_widgets/quantity_widget.dart';
 
 class ProsuctScreen extends StatelessWidget {
   final ItemModel item;
@@ -44,11 +45,7 @@ class ProsuctScreen extends StatelessWidget {
                       children: [
                         Text(item.itemName, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 27, fontWeight: FontWeight.bold)),
                         const Spacer(),
-                        Container(
-                          height: 30,
-                          width: 70,
-                          color: Colors.red,
-                        )
+                        QauntityWidget()
                       ],
                     ),
                     Text(
