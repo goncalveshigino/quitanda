@@ -1,7 +1,9 @@
+import 'package:quitanda/src/models/cart_item_model.dart';
 import 'package:quitanda/src/models/item_model.dart';
 
 ItemModel apple = ItemModel(
-  description: 'A melhor maçã da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
+  description:
+      'A melhor maçã da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
   imgUrl: 'assets/fruits/apple.png',
   itemName: 'Maçã',
   price: 5.5,
@@ -13,7 +15,8 @@ ItemModel grape = ItemModel(
   itemName: 'Uva',
   price: 7.4,
   unit: 'kg',
-  description: 'A melhor uva da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
+  description:
+      'A melhor uva da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
 );
 
 ItemModel guava = ItemModel(
@@ -21,7 +24,8 @@ ItemModel guava = ItemModel(
   itemName: 'Goiaba',
   price: 11.5,
   unit: 'kg',
-  description: 'A melhor goiaba da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
+  description:
+      'A melhor goiaba da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
 );
 
 ItemModel kiwi = ItemModel(
@@ -29,7 +33,8 @@ ItemModel kiwi = ItemModel(
   itemName: 'Kiwi',
   price: 2.5,
   unit: 'un',
-  description: 'O melhor kiwi da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
+  description:
+      'O melhor kiwi da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
 );
 
 ItemModel mango = ItemModel(
@@ -37,7 +42,8 @@ ItemModel mango = ItemModel(
   itemName: 'Manga',
   price: 2.5,
   unit: 'un',
-  description: 'A melhor manga da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
+  description:
+      'A melhor manga da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
 );
 
 ItemModel papaya = ItemModel(
@@ -45,7 +51,8 @@ ItemModel papaya = ItemModel(
   itemName: 'Mamão papaya',
   price: 8,
   unit: 'kg',
-  description: 'O melhor mamão da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
+  description:
+      'O melhor mamão da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
 );
 
 // Lista de produtos
@@ -64,4 +71,21 @@ List<String> categories = [
   'Verduras',
   'Temperos',
   'Cereais',
+];
+
+List<CartItemModel> cartItems = [
+
+  CartItemModel(
+    item: apple,
+    quantity: 2,
+  ),
+   CartItemModel(
+    item: mango,
+    quantity: 2,
+  ),
+   CartItemModel(
+    item: guava,
+    quantity: 2,
+  ),
+
 ];
