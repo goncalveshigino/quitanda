@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomTextField extends StatefulWidget {
+  
   final IconData icon;
   final String label;
   final bool isSecret;
@@ -20,6 +21,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  
   bool isObscure = false;
 
   @override

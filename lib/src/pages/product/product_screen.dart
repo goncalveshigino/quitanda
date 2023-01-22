@@ -6,7 +6,6 @@ import '../../models/item_model.dart';
 import '../common_widgets/quantity_widget.dart';
 
 class ProsuctScreen extends StatefulWidget {
-
   final ItemModel item;
 
   ProsuctScreen({Key? key, required this.item}) : super(key: key);
@@ -53,24 +52,31 @@ class _ProsuctScreenState extends State<ProsuctScreen> {
                   children: [
                     Row(
                       children: [
-                        Text(widget.item.itemName, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 27, fontWeight: FontWeight.bold)),
+                        Text(
+                          widget.item.itemName,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontSize: 27, fontWeight: FontWeight.bold),
+                        ),
                         const Spacer(),
                         QauntityWidget(
                           suffixText: widget.item.unit,
                           value: cartItemQuantity,
                           result: (quantity) {
-                    
-                           setState(() {
-                             cartItemQuantity = quantity;
-                           });
-                            
+                            setState(() {
+                              cartItemQuantity = quantity;
+                            });
                           },
                         )
                       ],
                     ),
                     Text(
                       utilsServices.priceToCurrency(widget.item.price),
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: CustomColors.customSwatchColor),
+                      style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          color: CustomColors.customSwatchColor),
                     ),
                     Expanded(
                       child: Padding(
@@ -89,13 +95,16 @@ class _ProsuctScreenState extends State<ProsuctScreen> {
                         onPressed: () {},
                         label: const Text(
                           'Adicionar no Carrinho',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         icon: const Icon(
                           Icons.shopping_cart_outlined,
                           color: Colors.white,
                         ),
-                        style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
                   ],
