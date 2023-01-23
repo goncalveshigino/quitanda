@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
+import 'package:quitanda/src/pages/cart/components/cart_tile.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 import 'package:quitanda/src/config/app_data.dart' as appData;
 
@@ -17,10 +18,10 @@ class CartTab extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
+              child: ListView.builder(
             itemCount: appData.cartItems.length,
             itemBuilder: (_, index) {
-              return Text(appData.cartItems[index].item.itemName);
+              return CartTile(cartItem: appData.cartItems[index]);
             },
           )),
           Container(
@@ -49,7 +50,7 @@ class CartTab extends StatelessWidget {
                   utilsServices.priceToCurrency(50.5),
                   style: TextStyle(
                     fontSize: 23,
-                    color: CustomColors.customConstrastColor,
+                    color: CustomColors.customSwatchColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -57,8 +58,6 @@ class CartTab extends StatelessWidget {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      // ignore: deprecated_member_use
-                      primary: CustomColors.customSwatchColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
