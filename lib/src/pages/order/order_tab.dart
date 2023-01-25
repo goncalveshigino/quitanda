@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quitanda/src/config/app_data.dart' as appData;
+import 'package:quitanda/src/pages/order/components/order_tile.dart';
 
-import 'components/order_tile.dart';
+
 
 class OrderTab extends StatelessWidget {
   const OrderTab({Key? key}) : super(key: key);
@@ -15,8 +16,8 @@ class OrderTab extends StatelessWidget {
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         physics: const BouncingScrollPhysics(),
-        itemBuilder: (_, index) => const SizedBox(height: 10),
-        separatorBuilder: (_, index) => OrderTile(order: appData.orders[index]),
+        separatorBuilder: (_, index) => const SizedBox(height: 10),
+        itemBuilder: (_, index) => OrderTile(order: appData.orders[index]),
         itemCount: appData.orders.length,
       ),
     );
