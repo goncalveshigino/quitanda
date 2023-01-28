@@ -6,6 +6,7 @@ import '../../../config/custom_colors.dart';
 import '../../../models/cart_item_model.dart';
 
 class CartTile extends StatefulWidget {
+  
   final CartItemModel cartItem;
   final Function(CartItemModel) remove;
 

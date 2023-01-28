@@ -40,15 +40,16 @@ class _CartTabState extends State<CartTab> {
       body: Column(
         children: [
           Expanded(
-              child: ListView.builder(
-            itemCount: appData.cartItems.length,
-            itemBuilder: (_, index) {
-              return CartTile(
-                cartItem: appData.cartItems[index],
-                remove: removeItemFromCart,
-              );
-            },
-          )),
+            child: ListView.builder(
+              itemCount: appData.cartItems.length,
+              itemBuilder: (_, index) {
+                return CartTile(
+                  cartItem: appData.cartItems[index],
+                  remove: removeItemFromCart,
+                );
+              },
+            ),
+          ),
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(

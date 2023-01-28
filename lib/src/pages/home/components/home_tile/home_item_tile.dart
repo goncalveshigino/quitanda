@@ -28,7 +28,7 @@ class HomeItemTile extends StatelessWidget {
           onTap:(){
              Navigator.of(context).push(
               MaterialPageRoute(builder: (c){
-                 return ProsuctScreen(item: item,);
+                 return ProsuctTab(item: item,);
               }));
           },
           child: Card(

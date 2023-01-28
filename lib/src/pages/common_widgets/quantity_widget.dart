@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 
 class QauntityWidget extends StatelessWidget {
+
   final int value;
   final String suffixText;
   final Function(int quantity) result;
@@ -24,16 +25,15 @@ class QauntityWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade300,
-            spreadRadius: 1,
-            blurRadius: 2,
+            color: Colors.green.shade300,
+            spreadRadius: 0.5,
+            blurRadius: 1.5,
           ),
         ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-
 
           _QuantityButton(
             icon: !isRemovable || value > 1 ? Icons.remove : Icons.delete_forever,

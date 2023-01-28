@@ -3,6 +3,7 @@ import 'package:quitanda/src/pages/common_widgets/custom_text_field.dart';
 import 'package:quitanda/src/config/app_data.dart' as appData;
 
 class ProfileTab extends StatefulWidget {
+
   const ProfileTab({
     Key? key,
   }) : super(key: key);
@@ -25,7 +26,7 @@ class _ProfileTabState extends State<ProfileTab> {
         ],
       ),
       body: ListView(
-        physics:const BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
         children: [
           CustomTextField(
@@ -118,7 +119,9 @@ class _ProfileTabState extends State<ProfileTab> {
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
-                        onPressed: () {},
+                        onPressed: () {
+                          
+                        },
                         child: const Text('Atualizar'),
                       ),
                     )

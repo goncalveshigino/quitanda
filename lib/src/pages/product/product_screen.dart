@@ -5,16 +5,17 @@ import 'package:quitanda/src/services/utils_services.dart';
 import '../../models/item_model.dart';
 import '../common_widgets/quantity_widget.dart';
 
-class ProsuctScreen extends StatefulWidget {
+class ProsuctTab extends StatefulWidget {
+  
   final ItemModel item;
 
-  ProsuctScreen({Key? key, required this.item}) : super(key: key);
+ const ProsuctTab({Key? key, required this.item}) : super(key: key);
 
   @override
-  State<ProsuctScreen> createState() => _ProsuctScreenState();
+  State<ProsuctTab> createState() => _ProsuctTabState();
 }
 
-class _ProsuctScreenState extends State<ProsuctScreen> {
+class _ProsuctTabState extends State<ProsuctTab> {
   final UtilsServices utilsServices = UtilsServices();
 
   int cartItemQuantity = 1;
