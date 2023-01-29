@@ -126,7 +126,7 @@ List<OrderModel> orders = [
         '2022-06-08 21:30:30.463'
       ),
       id: 'ggfuwswgw57hgc',
-      status: 'pedind_payment',
+      status: 'refunded',
       total: 11.0,
       items: [
         CartItemModel(
