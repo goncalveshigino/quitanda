@@ -3,6 +3,7 @@ import 'package:quitanda/src/models/cart_item_model.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 import '../../../models/order_model.dart';
+import 'order_status_widgets.dart';
 
 class OrderTile extends StatelessWidget {
   OrderTile({
@@ -41,20 +42,34 @@ class OrderTile extends StatelessWidget {
               height: 150,
               child: Row(
                 children: [
+
+                  //Lista de produtos
                   Expanded(
-                      flex: 3,
-                      child: ListView(
-                        children: order.items.map((orderItem) {
-                          return _OrderItemWidget(
-                            utilsServices: utilsServices,
-                            orderItem: orderItem,);
-                        }).toList(),
-                      )),
+                    flex: 3,
+                    child: ListView(
+                      children: order.items.map((orderItem) {
+                        return _OrderItemWidget(
+                          utilsServices: utilsServices,
+                          orderItem: orderItem,
+                        );
+                      }).toList(),
+                    ),
+                  ),
+
+                  VerticalDivider(
+                    color: Colors.grey.shade300,
+                    thickness: 2,
+                    width: 8,
+                  ),
+
+                  //Status do pedido
                   Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: Colors.green,
-                      ))
+                    flex: 2,
+                    child: OrderStatusWidget(
+                      status: order.status,
+                      isOverdue: order.overdueDateTime.isBefore( DateTime.now()),
+                    ),
+                  )
                 ],
               ),
             )
@@ -66,7 +81,6 @@ class OrderTile extends StatelessWidget {
 }
 
 class _OrderItemWidget extends StatelessWidget {
-
   const _OrderItemWidget({
     Key? key,
     required this.utilsServices,
@@ -84,13 +98,12 @@ class _OrderItemWidget extends StatelessWidget {
         children: [
           Text(
             '${orderItem.quantity} ${orderItem.item.unit} ',
-            style: const TextStyle(fontWeight: FontWeight.bold
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          Expanded(child: Text(orderItem.item.itemName),),
-          Text(
-            utilsServices.priceToCurrency(orderItem.totalPrice())
-          )
+          Expanded(
+            child: Text(orderItem.item.itemName),
+          ),
+          Text(utilsServices.priceToCurrency(orderItem.totalPrice()))
         ],
       ),
     );
