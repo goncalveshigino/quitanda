@@ -109,7 +109,7 @@ List<OrderModel> orders = [
         '2022-06-08 21:30:30.463'
       ),
       id: 'ggfuwswgw57hgc',
-      status: 'pedind_payment',
+      status: 'pending_payment',
       total: 11.0,
       items: [
         CartItemModel(
@@ -120,13 +120,13 @@ List<OrderModel> orders = [
   OrderModel(
       copyAndPaste: 'gsfst2t367gh',
       createdDateTime: DateTime.parse(
-        '2022-06-08 20:20:10.435',
+        '2023-06-08 20:20:10.435',
       ),
       overdueDateTime: DateTime.parse(
-        '2022-06-08 21:30:30.463'
+        '2023-06-08 21:30:30.463'
       ),
       id: 'ggfuwswgw57hgc',
-      status: 'refunded',
+      status: 'delivered',
       total: 11.0,
       items: [
         CartItemModel(
