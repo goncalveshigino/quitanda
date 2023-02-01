@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quitanda/src/models/cart_item_model.dart';
+import 'package:quitanda/src/pages/common_widgets/payment_dialog.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 import '../../../models/order_model.dart';
@@ -90,12 +91,17 @@ class OrderTile extends StatelessWidget {
             Visibility(
               visible: order.status == 'pending_payment',
               child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                  )
-                ),
-                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        return PaymentDialog(order: order,);
+                      },
+                    );
+                  },
                   icon: Image.asset(
                     'assets/app_image/pix.png',
                     height: 18,
