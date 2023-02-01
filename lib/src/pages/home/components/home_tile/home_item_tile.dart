@@ -9,12 +9,17 @@ class HomeItemTile extends StatelessWidget {
 
  
   final ItemModel item;
+  final void Function(GlobalKey) cartAnimationMethod;
 
- final  UtilsServices utilsServices = UtilsServices();
+  final GlobalKey imageGk = GlobalKey();
+
+
+   final  UtilsServices utilsServices = UtilsServices();
 
   HomeItemTile({
     Key? key,
     required this.item,
+    required this.cartAnimationMethod, 
   }) : super(key: key);
 
 
@@ -33,7 +38,7 @@ class HomeItemTile extends StatelessWidget {
           },
           child: Card(
             elevation: 5,
-            shadowColor: Color.fromARGB(255, 75, 27, 27),
+            shadowColor: const Color.fromARGB(255, 75, 27, 27),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -47,6 +52,7 @@ class HomeItemTile extends StatelessWidget {
                       tag: item.imgUrl,
                       child: Image.asset(
                         item.imgUrl,
+                        key: imageGk,
                         width: 100.0,
                         height: 100.0,
                       ),
@@ -84,14 +90,13 @@ class HomeItemTile extends StatelessWidget {
           ),
         ),
 
+        
         Positioned(
           top: 4,
           right: 4,
-
-
           child: GestureDetector(
             onTap: (){
-              print('Ola');
+              cartAnimationMethod(imageGk);
             },
             child: Container(
           
