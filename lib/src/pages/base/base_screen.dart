@@ -5,9 +5,7 @@ import '../cart/cart_tab.dart';
 import '../order/order_tab.dart';
 import '../profile/profile_tab.dart';
 
-
 class BaseScreen extends StatefulWidget {
-
   const BaseScreen({Key? key}) : super(key: key);
 
   @override
@@ -15,7 +13,6 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
-
   int currentIndex = 0;
   final pageController = PageController();
 
@@ -25,13 +22,11 @@ class _BaseScreenState extends State<BaseScreen> {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
-        children:  const[
-          
+        children: const [
           HomeTab(),
           CartTab(),
           OrderTab(),
           ProfileTab(),
-
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -40,6 +35,11 @@ class _BaseScreenState extends State<BaseScreen> {
           setState(() {
             currentIndex = index;
             pageController.jumpToPage(index);
+            pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.ease,
+            );
           });
         },
         type: BottomNavigationBarType.fixed,
