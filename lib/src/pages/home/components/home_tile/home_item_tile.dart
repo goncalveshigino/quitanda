@@ -6,35 +6,30 @@ import '../../../../services/utils_services.dart';
 import '../../../product/product_screen.dart';
 
 class HomeItemTile extends StatelessWidget {
-
- 
   final ItemModel item;
   final void Function(GlobalKey) cartAnimationMethod;
 
   final GlobalKey imageGk = GlobalKey();
 
-
-   final  UtilsServices utilsServices = UtilsServices();
+  final UtilsServices utilsServices = UtilsServices();
 
   HomeItemTile({
     Key? key,
     required this.item,
-    required this.cartAnimationMethod, 
+    required this.cartAnimationMethod,
   }) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
         GestureDetector(
-          onTap:(){
-             Navigator.of(context).push(
-              MaterialPageRoute(builder: (c){
-                 return ProsuctTab(item: item,);
-              }));
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (c) {
+              return ProsuctTab(
+                item: item,
+              );
+            }));
           },
           child: Card(
             elevation: 5,
@@ -68,60 +63,53 @@ class HomeItemTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                       utilsServices.priceToCurrency( item.price),
-                        style:  TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: CustomColors.customSwatchColor
-                        ),
+                        utilsServices.priceToCurrency(item.price),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: CustomColors.customSwatchColor),
                       ),
-        
-                      Text('/${item.unit}', style: TextStyle(
-                        color: Colors.grey.shade500,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12
-                      ),)
+                      Text(
+                        '/${item.unit}',
+                        style: TextStyle(
+                            color: Colors.grey.shade500,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12),
+                      )
                     ],
                   )
                 ],
               ),
             ),
-            
           ),
         ),
-
-        
         Positioned(
-          top: 4,
-          right: 4,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    topRight: Radius.circular(20)
-            ),
-            child: Material(
-              child: InkWell(
-                onTap: (){
-                  cartAnimationMethod(imageGk);
-                },
-                child: Ink(
-                  height: 40,
-                  width: 35,
-                  decoration: BoxDecoration(
-                    color: CustomColors.customSwatchColor,
-                   
-                  ),
-              
-                  child: const Icon(
-                    Icons.add_shopping_cart_outlined,
-                    color: Colors.white,
-                    size: 20,
+            top: 4,
+            right: 4,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  topRight: Radius.circular(20)),
+              child: Material(
+                child: InkWell(
+                  onTap: () {
+                    cartAnimationMethod(imageGk);
+                  },
+                  child: Ink(
+                    height: 40,
+                    width: 35,
+                    decoration: BoxDecoration(
+                      color: CustomColors.customSwatchColor,
+                    ),
+                    child: const Icon(
+                      Icons.add_shopping_cart_outlined,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ),
                 ),
               ),
-            ),
-          )
-        )
+            ))
       ],
     );
   }
