@@ -5,6 +5,7 @@ import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
 import '../../config/custom_colors.dart';
 
 class SplashScreen extends StatefulWidget {
+
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -12,6 +13,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  
   @override
   void initState() {
     super.initState();
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
         return const SignInScreen();
       }));
     });
-    
+
   }
 
   @override
