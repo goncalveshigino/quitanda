@@ -6,6 +6,7 @@ import 'package:quitanda/src/config/app_data.dart' as appData;
 import 'package:quitanda/src/pages/home/components/home_tile/home_item_tile.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
+import '../common_widgets/app_name_widget.dart';
 import 'components/home_tile/categoria_tile.dart';
 
 class HomeTab extends StatefulWidget {
@@ -35,27 +36,7 @@ class _HomeTabState extends State<HomeTab> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text.rich(
-          TextSpan(
-            style: const TextStyle(
-              fontSize: 30,
-            ),
-            children: [
-              TextSpan(
-                text: 'Green',
-                style: TextStyle(
-                  color: CustomColors.customSwatchColor,
-                ),
-              ),
-              TextSpan(
-                text: 'grocer',
-                style: TextStyle(
-                  color: CustomColors.customConstrastColor,
-                ),
-              ),
-            ],
-          ),
-        ),
+        title: const AppNameWidget(),
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 15, right: 15),
