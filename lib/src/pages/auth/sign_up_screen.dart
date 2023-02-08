@@ -3,9 +3,9 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/pages/common_widgets/custom_text_field.dart';
 
-class SignScreen extends StatelessWidget {
+class SignUpScreen extends StatelessWidget {
 
-   SignScreen({Key? key}) : super(key: key);
+   SignUpScreen({Key? key}) : super(key: key);
 
   final cpfFormatter = MaskTextInputFormatter(
     mask: '###.###.###-##',
