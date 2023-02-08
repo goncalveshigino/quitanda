@@ -2,8 +2,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
-import 'package:quitanda/src/pages/auth/sign_up_screen.dart';
-import 'package:quitanda/src/pages/base/base_screen.dart';
+import 'package:quitanda/src/pages/auth/controller/auth_controller.dart';
+
 import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
 import 'package:quitanda/src/pages_routes/app_pages.dart';
 
@@ -11,6 +11,10 @@ import '../common_widgets/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+
+  //Controlador de campos
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   SignInScreen({Key? key}) : super(key: key);
 
@@ -68,6 +72,7 @@ class SignInScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     CustomTextField(
+                      controller: emailController,
                       icon: Icons.email,
                       label: 'Email',
                       validator: (email) {
@@ -82,6 +87,7 @@ class SignInScreen extends StatelessWidget {
                     ),
 
                     CustomTextField(
+                      controller: passwordController,
                       icon: Icons.lock,
                       label: 'Senha',
                       isSecret: true,
@@ -100,24 +106,40 @@ class SignInScreen extends StatelessWidget {
 
                     SizedBox(
                       height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18))),
-                        onPressed: () {
+                      child: GetX<AuthController>(
+                        builder: (authController) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18))),
+                            onPressed: authController.isLoadin.value 
+                            ? null
+                            :() { 
 
-                          if(_formKey.currentState!.validate()){
-                            print('OK');
-                           }else{
-                              print('Nao Ok');
-                           }
-                         
-                          // Get.offNamed(PagesRoutes.baseRoute);
+                              FocusScope.of(context).unfocus();
+
+                              if (_formKey.currentState!.validate()) {
+                                String email = emailController.text;
+                                String password = passwordController.text;
+
+                                authController.signIn(
+                                    email: email, password: password);
+                              } else {
+                                print('Nao Ok');
+                              }
+
+                              // Get.offNamed(PagesRoutes.baseRoute);
+                            },
+                            child: authController.isLoadin.value
+                                ? const CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation(Colors.white),
+                                )
+                                : const Text(
+                                    'Entrar',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                          );
                         },
-                        child: const Text(
-                          'Entrar',
-                          style: TextStyle(fontSize: 18),
-                        ),
                       ),
                     ),
 
