@@ -10,7 +10,9 @@ import 'package:quitanda/src/pages_routes/app_pages.dart';
 import '../common_widgets/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
+
+  SignInScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,85 +62,118 @@ class SignInScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(45))),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const CustomTextField(
-                    icon: Icons.email,
-                    label: 'Email',
-                  ),
-                  const CustomTextField(
-                    icon: Icons.lock,
-                    label: 'Senha',
-                    isSecret: true,
-                  ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CustomTextField(
+                      icon: Icons.email,
+                      label: 'Email',
+                      validator: (email) {
+                        if (email == null || email.isEmpty) {
+                          return 'Digite seu email';
+                        }
 
-                  SizedBox(
-                    height: 50,
-                    child: ElevatedButton(
+                        if (!email.isEmail) return 'Digite um email valido';
+
+                        return null;
+                      },
+                    ),
+
+                    CustomTextField(
+                      icon: Icons.lock,
+                      label: 'Senha',
+                      isSecret: true,
+                      validator: (password) {
+                        if (password == null || password.isEmpty) {
+                          return 'Digite sua palavra passe';
+                        }
+
+                        if (password.length < 7) {
+                          return 'Digite uma senha de pelo menos 7 caracteres';
+                        }
+
+                        return null;
+                      },
+                    ),
+
+                    SizedBox(
+                      height: 50,
+                      child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18))),
                         onPressed: () {
-                          Get.offNamed(PagesRoutes.baseRoute);
+
+                          if(_formKey.currentState!.validate()){
+                            print('OK');
+                           }else{
+                              print('Nao Ok');
+                           }
+                         
+                          // Get.offNamed(PagesRoutes.baseRoute);
                         },
                         child: const Text(
                           'Entrar',
                           style: TextStyle(fontSize: 18),
-                        )),
-                  ),
-
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Esqueceu a senha?',
-                          style: TextStyle(
-                              color: CustomColors.customConstrastColor),
-                        )),
-                  ),
-
-                  //Divisor
-
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            color: Colors.grey.withAlpha(90),
-                            thickness: 2,
-                          ),
                         ),
-                        const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: Text('Ou')),
-                        Expanded(
-                          child: Divider(
-                            color: Colors.grey.withAlpha(90),
-                            thickness: 2,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
 
-                  //Botao novo usuario
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18)),
-                        side: const BorderSide(width: 2, color: Colors.green)),
-                    child: const Text(
-                      'Criar conta',
-                      style: TextStyle(fontSize: 18),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Esqueceu a senha?',
+                            style: TextStyle(
+                                color: CustomColors.customConstrastColor),
+                          )),
                     ),
-                    onPressed: () {
-                      Get.toNamed(PagesRoutes.signUpRoute);
-                    },
-                  )
-                ],
+
+                    //Divisor
+
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              color: Colors.grey.withAlpha(90),
+                              thickness: 2,
+                            ),
+                          ),
+                          const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: Text('Ou')),
+                          Expanded(
+                            child: Divider(
+                              color: Colors.grey.withAlpha(90),
+                              thickness: 2,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //Botao novo usuario
+                    OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18)),
+                          side:
+                              const BorderSide(width: 2, color: Colors.green)),
+                      child: const Text(
+                        'Criar conta',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      onPressed: () {
+                        Get.toNamed(PagesRoutes.signUpRoute);
+                      },
+                    )
+                  ],
+                ),
               ),
             )
           ]),
