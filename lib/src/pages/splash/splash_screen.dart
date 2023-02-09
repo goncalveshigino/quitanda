@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quitanda/src/pages/auth/sign_in_screen.dart';
+import 'package:quitanda/src/pages/auth/view/sign_in_screen.dart';
 import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
 import 'package:quitanda/src/pages_routes/app_pages.dart';
 

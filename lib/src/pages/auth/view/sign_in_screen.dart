@@ -7,7 +7,7 @@ import 'package:quitanda/src/pages/auth/controller/auth_controller.dart';
 import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
 import 'package:quitanda/src/pages_routes/app_pages.dart';
 
-import '../common_widgets/custom_text_field.dart';
+import '../../common_widgets/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
