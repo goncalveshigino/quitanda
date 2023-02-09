@@ -7,6 +7,7 @@ import 'package:quitanda/src/pages/splash/splash_screen.dart';
 abstract class AppPages {
 
   static final pages = <GetPage>[
+    
     GetPage(
       name: PagesRoutes.splashRoute,
       page: () => const SplashScreen(),

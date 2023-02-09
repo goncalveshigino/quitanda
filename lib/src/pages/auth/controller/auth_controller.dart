@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
+  
   RxBool isLoadin = false.obs;
 
   Future<void> signIn({

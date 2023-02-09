@@ -61,7 +61,10 @@ class SignInScreen extends StatelessWidget {
 
             //Formulario
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 27),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32,
+                vertical: 27,
+              ),
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius:
@@ -112,28 +115,28 @@ class SignInScreen extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18))),
-                            onPressed: authController.isLoadin.value 
-                            ? null
-                            :() { 
+                            onPressed: authController.isLoadin.value
+                                ? null
+                                : () {
+                                    FocusScope.of(context).unfocus();
 
-                              FocusScope.of(context).unfocus();
+                                    if (_formKey.currentState!.validate()) {
+                                      String email = emailController.text;
+                                      String password = passwordController.text;
 
-                              if (_formKey.currentState!.validate()) {
-                                String email = emailController.text;
-                                String password = passwordController.text;
+                                      authController.signIn(
+                                          email: email, password: password);
+                                    } else {
+                                      print('Nao Ok');
+                                    }
 
-                                authController.signIn(
-                                    email: email, password: password);
-                              } else {
-                                print('Nao Ok');
-                              }
-
-                              // Get.offNamed(PagesRoutes.baseRoute);
-                            },
+                                    // Get.offNamed(PagesRoutes.baseRoute);
+                                  },
                             child: authController.isLoadin.value
                                 ? const CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation(Colors.white),
-                                )
+                                    valueColor:
+                                        AlwaysStoppedAnimation(Colors.white),
+                                  )
                                 : const Text(
                                     'Entrar',
                                     style: TextStyle(fontSize: 18),
@@ -182,10 +185,11 @@ class SignInScreen extends StatelessWidget {
                     //Botao novo usuario
                     OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
-                          side:
-                              const BorderSide(width: 2, color: Colors.green)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        side: const BorderSide(width: 2, color: Colors.green),
+                      ),
                       child: const Text(
                         'Criar conta',
                         style: TextStyle(fontSize: 18),
