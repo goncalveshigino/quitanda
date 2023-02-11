@@ -10,6 +10,7 @@ class HttpManager {
   }) async {
 
     final defaultHeaders = hearders?.cast<String, String>() ?? {}
+
     ..addAll({
       'content-type': 'application/json',
       'accept': 'application/json',
@@ -21,7 +22,7 @@ class HttpManager {
     
     try {
      Response response = await dio.request(
-        url,
+         url,
           options: Options(
             headers: defaultHeaders,
             method: method),
