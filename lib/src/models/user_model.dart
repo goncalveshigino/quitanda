@@ -30,7 +30,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, cpf: $cpf, password: $password, id: $id, token: $token)';
+    return 'UserModel(name: $name, email: $email, phone: $phone, cpf: $cpf, password: $password, id: $id, token: $token,)';
   }
 }
 

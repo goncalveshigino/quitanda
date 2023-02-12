@@ -13,7 +13,7 @@ class AuthRepository {
     final result = await _httpManager.restRequest(
         url: Endpoints.signin,
         method: HttpMethods.post,
-        body: {"email": email, "password": password});
+        body: {'email': email, 'password': password});
 
     if (result['result'] != null) {
       final user = UserModel.fromJson(result['result']);
@@ -21,6 +21,22 @@ class AuthRepository {
     } else {
       return AuthResult.error(
         auth_error.authErrorsString(result['error']),
+      );
+    }
+  }
+
+  Future<AuthResult> validateToken(String token) async {
+    final result = await _httpManager.restRequest(
+        url: Endpoints.validateToken,
+        method: HttpMethods.post,
+        hearders: {'X-Parse-Session-Token': token});
+
+    if (result['result'] != null) {
+      final user = UserModel.fromJson(result['result']);
+      return AuthResult.success(user);
+    } else {
+      return AuthResult.error(
+        auth_error.authErrorsString(result['result']),
       );
     }
   }
