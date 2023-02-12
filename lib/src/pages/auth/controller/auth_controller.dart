@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:quitanda/src/pages/auth/repository/auth_repository.dart';
+import 'package:quitanda/src/pages/auth/result/auth_result.dart';
 
 class AuthController extends GetxController {
-  
   RxBool isLoadin = false.obs;
 
   final authRepository = AuthRepository();
@@ -11,10 +11,21 @@ class AuthController extends GetxController {
     required String email,
     required String password,
   }) async {
+    
     isLoadin.value = true;
 
-    await authRepository.signIn(email: email, password: password);
+    AuthResult result =
+        await authRepository.signIn(email: email, password: password);
 
     isLoadin.value = false;
+
+    result.when(
+      success: (user) {
+        print(user);
+      },
+      error: (message) {
+        print(message);
+      },
+    );
   }
 }
