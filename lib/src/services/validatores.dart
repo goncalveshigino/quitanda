@@ -29,7 +29,7 @@ String? nameValidator(String? name) {
 
   final names = name.split(' ');
 
-  if (name.length == 1) return 'Digite seu nome completo';
+  if (names.length == 1) return 'Digite seu nome completo';
 
   return null;
 }
@@ -38,7 +38,7 @@ String? phoneValidator(String? phone) {
   if (phone == null || phone.isEmpty) {
     return 'Digite um numero de telefone';
   }
-  if (!phone.isPhoneNumber) return 'Digite um numero valido';
+  if (phone.length < 9 ) return 'Digite um numero valido';
 
   return null;
 }

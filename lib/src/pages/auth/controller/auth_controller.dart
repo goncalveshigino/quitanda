@@ -22,7 +22,6 @@ class AuthController extends GetxController {
   }
 
   Future<void> validateToken() async {
-
     String? token = await utilsServices.getLocalData(key: StorageKeys.token);
 
     if (token == null) {
@@ -44,14 +43,13 @@ class AuthController extends GetxController {
     );
   }
 
-
   void saveTokenAndProceedToBase() {
     utilsServices.saveLocalData(key: StorageKeys.token, data: user.token!);
 
     Get.offAllNamed(PagesRoutes.baseRoute);
   }
 
-    Future<void> signOut() async {
+  Future<void> signOut() async {
     user = UserModel();
 
     await utilsServices.removeLocalData(
@@ -61,7 +59,26 @@ class AuthController extends GetxController {
     Get.offAllNamed(PagesRoutes.signInRoute);
   }
 
-  
+  Future<void> signUp() async {
+    isLoadin.value = true;
+
+    AuthResult result = await authRepository.signUp(user);
+
+    isLoadin.value = false;
+
+    result.when(
+      success: (user) {
+        this.user = user;
+        saveTokenAndProceedToBase();
+      },
+      error: (message) {
+        utilsServices.showToast(
+          message: message,
+          isError: true
+        );
+      },
+    );
+  }
 
   Future<void> signIn({
     required String email,
