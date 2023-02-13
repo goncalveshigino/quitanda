@@ -59,9 +59,7 @@ class _HomeTabState extends State<HomeTab> {
           Padding(
             padding: const EdgeInsets.only(top: 15, right: 15),
             child: GestureDetector(
-              onTap: () {
-                print('Tocou');
-              },
+              onTap: () {},
               child: Badge(
                 backgroundColor: CustomColors.customConstrastColor,
                 label: const Text(

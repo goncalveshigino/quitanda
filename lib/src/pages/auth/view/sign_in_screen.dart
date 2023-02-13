@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/pages/auth/controller/auth_controller.dart';
+import 'package:quitanda/src/pages/auth/view/components/forgot_password_dialog.dart';
 
 import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
 import 'package:quitanda/src/pages_routes/app_pages.dart';
@@ -11,7 +12,6 @@ import 'package:quitanda/src/services/validatores.dart';
 import '../../common_widgets/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  
   final _formKey = GlobalKey<FormState>();
 
   //Controlador de campos
@@ -110,8 +110,6 @@ class SignInScreen extends StatelessWidget {
 
                                       authController.signIn(
                                           email: email, password: password);
-                                    } else {
-                                      print('Nao Ok');
                                     }
 
                                     // Get.offNamed(PagesRoutes.baseRoute);
@@ -133,7 +131,14 @@ class SignInScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return ForgotPasswordDialog(email: emailController.text);
+                              },
+                            );
+                          },
                           child: Text(
                             'Esqueceu a senha?',
                             style: TextStyle(

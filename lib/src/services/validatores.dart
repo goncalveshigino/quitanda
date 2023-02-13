@@ -38,7 +38,7 @@ String? phoneValidator(String? phone) {
   if (phone == null || phone.isEmpty) {
     return 'Digite um numero de telefone';
   }
-  if (phone.length < 9 ) return 'Digite um numero valido';
+  if (phone.length < 9 || !phone.isPhoneNumber) return 'Digite um numero valido';
 
   return null;
 }

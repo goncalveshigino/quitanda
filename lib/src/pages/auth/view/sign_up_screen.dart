@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/pages/common_widgets/custom_text_field.dart';
 import 'package:quitanda/src/services/validatores.dart';
 
-class SignUpScreen extends StatelessWidget {
+import '../controller/auth_controller.dart';
 
-   SignUpScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  SignUpScreen({Key? key}) : super(key: key);
 
   final cpfFormatter = MaskTextInputFormatter(
     mask: '###.###.###-##',
     filter: {'#': RegExp(r'[0-9]')},
   );
 
-    final phoneFormatter = MaskTextInputFormatter(
-    mask: '+ ### ###-###-###',
+  final phoneFormatter = MaskTextInputFormatter(
+    mask: '###-###-###',
     filter: {'#': RegExp(r'[0-9]')},
+    //  mask: '+ ### ###-###-###',
+    // filter: {'#': RegExp(r'[0-9]')},
   );
 
-
   final _formKey = GlobalKey<FormState>();
+
+  final authContoller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +37,12 @@ class SignUpScreen extends StatelessWidget {
           height: size.height,
           child: Stack(
             children: [
-
               Column(
                 children: [
                   const Expanded(
                     child: Center(
-                      child: Text('Cadastro', style: TextStyle(color: Colors.white, fontSize: 35)),
+                      child: Text('Cadastro',
+                          style: TextStyle(color: Colors.white, fontSize: 35)),
                     ),
                   ),
                   Container(
@@ -45,58 +50,93 @@ class SignUpScreen extends StatelessWidget {
                       horizontal: 32,
                       vertical: 40,
                     ),
-                    decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(45))),
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(45))),
                     child: Form(
                       key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          const CustomTextField(
+                          CustomTextField(
                             icon: Icons.email,
                             label: 'email',
+                            onSaved: (value) {
+                              authContoller.user.email = value;
+                            },
                             textInputType: TextInputType.emailAddress,
                             validator: emailValidatores,
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                             icon: Icons.lock,
                             label: 'Senha',
                             isSecret: true,
                             validator: passwordValidator,
+                            onSaved: (value) {
+                              authContoller.user.password = value;
+                            },
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                             icon: Icons.person,
                             label: 'Nome',
                             validator: nameValidator,
+                            onSaved: (value) {
+                              authContoller.user.name = value;
+                            },
                           ),
-                           CustomTextField(
+                          CustomTextField(
                             icon: Icons.phone,
                             label: 'Telefone',
                             inputFormatter: [phoneFormatter],
                             textInputType: TextInputType.phone,
                             validator: phoneValidator,
+                            onSaved: (value) {
+                              authContoller.user.phone = value;
+                            },
                           ),
-                           CustomTextField(
+                          CustomTextField(
                             icon: Icons.file_copy,
                             label: 'CPF',
                             inputFormatter: [cpfFormatter],
                             textInputType: TextInputType.number,
                             validator: cpfValidator,
+                            onSaved: (value) {
+                              authContoller.user.cpf = value;
+                            },
                           ),
                           SizedBox(
                             height: 50,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
-                              onPressed: () {
+                            child: Obx(
+                              () {
+                                return ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18))),
+                                  onPressed: authContoller.isLoadin.value
+                                      ? null
+                                      : () {
+                                          FocusScope.of(context).unfocus();
 
-                                _formKey.currentState?.validate();
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            _formKey.currentState!.save();
 
+                                            authContoller.signUp();
+                                            print(authContoller.user);
+                                          }
+                                        },
+                                  child: authContoller.isLoadin.value
+                                      ? const CircularProgressIndicator()
+                                      : const Text(
+                                          'Cadastrar usuário',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                          ),
+                                      ),
+                                );
                               },
-                              child: const Text(
-                                'Cadastrar usuário',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
                             ),
                           )
                         ],
@@ -105,7 +145,6 @@ class SignUpScreen extends StatelessWidget {
                   )
                 ],
               ),
-
               Positioned(
                 top: 10,
                 left: 10,
@@ -121,7 +160,6 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
         ),

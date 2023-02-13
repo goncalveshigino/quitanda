@@ -58,8 +58,10 @@ class AuthController extends GetxController {
 
     Get.offAllNamed(PagesRoutes.signInRoute);
   }
+  
 
   Future<void> signUp() async {
+
     isLoadin.value = true;
 
     AuthResult result = await authRepository.signUp(user);
@@ -69,6 +71,7 @@ class AuthController extends GetxController {
     result.when(
       success: (user) {
         this.user = user;
+
         saveTokenAndProceedToBase();
       },
       error: (message) {

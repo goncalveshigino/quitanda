@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quitanda/src/pages/auth/controller/auth_controller.dart';
 import 'package:quitanda/src/pages/common_widgets/custom_text_field.dart';
 import 'package:quitanda/src/config/app_data.dart' as appData;
 
 class ProfileTab extends StatefulWidget {
-
   const ProfileTab({
     Key? key,
   }) : super(key: key);
@@ -12,19 +13,18 @@ class ProfileTab extends StatefulWidget {
   State<ProfileTab> createState() => _ProfileTabState();
 }
 
-class _ProfileTabState extends State<ProfileTab> { 
-
-
-  
+class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
+    final authController = Get.find<AuthController>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Perfil do Usuario'),
         actions: [
           IconButton(
             onPressed: () {
-           
+              authController.signOut();
             },
             icon: const Icon(Icons.logout),
           )
@@ -124,9 +124,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
-                        onPressed: () {
-                          
-                        },
+                        onPressed: () {},
                         child: const Text('Atualizar'),
                       ),
                     )

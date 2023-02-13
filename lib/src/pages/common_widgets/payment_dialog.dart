@@ -41,7 +41,7 @@ class PaymentDialog extends StatelessWidget {
                 ),
                 Text(
                   'Vencimento ${utilsServices.formatDateTime(order.overdueDateTime)}',
-                  style: TextStyle(fontSize: 12),
+                  style:const TextStyle(fontSize: 12),
                 ),
                 Text(
                   'Total: ${utilsServices.priceToCurrency(order.total)}',
