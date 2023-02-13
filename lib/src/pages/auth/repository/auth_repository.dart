@@ -6,7 +6,6 @@ import '../../../models/user_model.dart';
 import '../../../services/http_manager.dart';
 
 class AuthRepository {
-
   final HttpManager _httpManager = HttpManager();
 
   AuthResult handleuUserOrError(Map<dynamic, dynamic> result) {
@@ -41,8 +40,7 @@ class AuthRepository {
   }
 
   Future<AuthResult> signUp(UserModel user) async {
-    
-   final result = await _httpManager.restRequest(
+    final result = await _httpManager.restRequest(
       url: Endpoints.signup,
       method: HttpMethods.post,
       body: user.toJson(),
@@ -51,4 +49,11 @@ class AuthRepository {
     return handleuUserOrError(result);
   }
 
+  Future<void> resetPassword(String email) async {
+    await _httpManager.restRequest(
+      url: Endpoints.resetPassword,
+      method: HttpMethods.post,
+      body:{'email': email},
+    );
+  }
 }
