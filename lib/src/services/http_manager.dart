@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+// import 'package:http/http.dart';
 
 class HttpManager {
 
@@ -17,6 +18,7 @@ class HttpManager {
       'X-Parse-Application-Id': 'wK7GcEjr2V4br5q5mlR1kybQ5dvxMFDX0qtE1d6Y',
       'X-Parse-REST-API-Key': '2kahi62fkWePLWAwC7k8aMrtQkobogcgkruMxbeB',
     });
+    
 
     Dio dio = Dio();
     

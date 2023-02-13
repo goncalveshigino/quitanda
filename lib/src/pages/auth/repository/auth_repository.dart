@@ -1,6 +1,5 @@
 import 'package:quitanda/src/constants/endpoints.dart';
-import 'package:quitanda/src/pages/auth/repository/auth_error.dart'
-    as auth_error;
+import 'package:quitanda/src/pages/auth/repository/auth_error.dart' as auth_error;
 import 'package:quitanda/src/pages/auth/result/auth_result.dart';
 import '../../../models/user_model.dart';
 import '../../../services/http_manager.dart';

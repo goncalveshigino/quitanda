@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/pages/common_widgets/custom_text_field.dart';
+import 'package:quitanda/src/services/validatores.dart';
 
 class SignUpScreen extends StatelessWidget {
 
@@ -16,6 +17,9 @@ class SignUpScreen extends StatelessWidget {
     mask: '+ ### ###-###-###',
     filter: {'#': RegExp(r'[0-9]')},
   );
+
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,46 +46,57 @@ class SignUpScreen extends StatelessWidget {
                       vertical: 40,
                     ),
                     decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(45))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const CustomTextField(
-                          icon: Icons.email,
-                          label: 'email',
-                        ),
-                        const CustomTextField(
-                          icon: Icons.lock,
-                          label: 'Senha',
-                          isSecret: true,
-                        ),
-                        const CustomTextField(
-                          icon: Icons.person,
-                          label: 'Nome',
-                        ),
-                         CustomTextField(
-                          icon: Icons.phone,
-                          label: 'Telefone',
-                          inputFormatter: [phoneFormatter],
-                        ),
-                         CustomTextField(
-                          icon: Icons.file_copy,
-                          label: 'CPF',
-                          inputFormatter: [cpfFormatter],
-                        ),
-                        SizedBox(
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
-                            onPressed: () {},
-                            child: const Text(
-                              'Cadastrar usuário',
-                              style: TextStyle(
-                                fontSize: 18,
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const CustomTextField(
+                            icon: Icons.email,
+                            label: 'email',
+                            textInputType: TextInputType.emailAddress,
+                            validator: emailValidatores,
+                          ),
+                          const CustomTextField(
+                            icon: Icons.lock,
+                            label: 'Senha',
+                            isSecret: true,
+                            validator: passwordValidator,
+                          ),
+                          const CustomTextField(
+                            icon: Icons.person,
+                            label: 'Nome',
+                            validator: nameValidator,
+                          ),
+                           CustomTextField(
+                            icon: Icons.phone,
+                            label: 'Telefone',
+                            inputFormatter: [phoneFormatter],
+                            textInputType: TextInputType.phone,
+                            validator: phoneValidator,
+                          ),
+                           CustomTextField(
+                            icon: Icons.file_copy,
+                            label: 'CPF',
+                            inputFormatter: [cpfFormatter],
+                            textInputType: TextInputType.number,
+                            validator: cpfValidator,
+                          ),
+                          SizedBox(
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
+                              onPressed: () {},
+                              child: const Text(
+                                'Cadastrar usuário',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
