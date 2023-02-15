@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/config/app_data.dart' as appData;
 import 'package:quitanda/src/pages/common_widgets/custom_shimmer.dart';
-import 'package:quitanda/src/pages/home/components/home_tile/home_item_tile.dart';
+import 'package:quitanda/src/pages/home/view/components/home_tile/home_item_tile.dart';
 import 'package:quitanda/src/pages/home/controller/home_controller.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
-import '../common_widgets/app_name_widget.dart';
+import '../../common_widgets/app_name_widget.dart';
 import 'components/home_tile/categoria_tile.dart';
 
 class HomeTab extends StatefulWidget {
@@ -34,8 +34,6 @@ class _HomeTabState extends State<HomeTab> {
   @override
   void initState() {
     super.initState();
-
-    Get.find<HomeController>().printExample();
 
     Future.delayed(
       const Duration(seconds: 3),

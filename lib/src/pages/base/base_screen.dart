@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quitanda/src/pages/home/home_tab.dart';
+import 'package:quitanda/src/pages/home/view/home_tab.dart';
 
 import '../cart/cart_tab.dart';
 import '../order/order_tab.dart';

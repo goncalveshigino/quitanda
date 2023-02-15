@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 
-import '../../../../models/item_model.dart';
-import '../../../../services/utils_services.dart';
-import '../../../product/product_screen.dart';
+import '../../../../../models/item_model.dart';
+import '../../../../../services/utils_services.dart';
+import '../../../../product/product_screen.dart';
 
 class HomeItemTile extends StatefulWidget {
   final ItemModel item;
