@@ -58,7 +58,7 @@ class _HomeItemTileState extends State<HomeItemTile> {
                   Expanded(
                     child: Hero(
                       tag: widget.item.imgUrl,
-                      child: Image.asset(
+                      child: Image.network(
                         widget.item.imgUrl,
                         key: imageGk,
                         width: 100.0,
