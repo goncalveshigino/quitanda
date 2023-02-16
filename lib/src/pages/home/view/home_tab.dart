@@ -134,7 +134,7 @@ class _HomeTabState extends State<HomeTab> {
                           separatorBuilder: (_, index) => const SizedBox(
                             width: 10,
                           ),
-                          itemCount: appData.categories.length,
+                          itemCount: controller.allCategories.length,
                         )
                       : ListView(
                           scrollDirection: Axis.horizontal,
@@ -171,6 +171,13 @@ class _HomeTabState extends State<HomeTab> {
                                   childAspectRatio: 9 / 11.5),
                           itemCount: controller.allProducts.length,
                           itemBuilder: (_, index) {
+
+                            if(((index + 1 )== controller.allProducts.length) && !controller.isLastPage){
+
+                            controller.loadMoreProducts();
+                               
+                            }
+
                             return HomeItemTile(
                               item: controller.allProducts[index],
                               cartAnimationMethod: itemSelectedCartAnimations,
