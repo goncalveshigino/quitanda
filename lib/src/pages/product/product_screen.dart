@@ -6,10 +6,9 @@ import '../../models/item_model.dart';
 import '../common_widgets/quantity_widget.dart';
 
 class ProsuctTab extends StatefulWidget {
-  
   final ItemModel item;
 
- const ProsuctTab({Key? key, required this.item}) : super(key: key);
+  const ProsuctTab({Key? key, required this.item}) : super(key: key);
 
   @override
   State<ProsuctTab> createState() => _ProsuctTabState();
@@ -31,7 +30,7 @@ class _ProsuctTabState extends State<ProsuctTab> {
               Expanded(
                 child: Hero(
                   tag: widget.item.imgUrl,
-                  child: Image.asset(widget.item.imgUrl),
+                  child: Image.network(widget.item.imgUrl),
                 ),
               ),
               Expanded(
