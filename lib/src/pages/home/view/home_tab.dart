@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
-import 'package:quitanda/src/config/app_data.dart' as appData;
 import 'package:quitanda/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:quitanda/src/pages/home/controller/home_controller.dart';
 import 'package:add_to_cart_animation/add_to_cart_animation.dart';
@@ -20,19 +19,17 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+
   GlobalKey<CartIconKey> globalKeyCartItems = GlobalKey<CartIconKey>();
   late Function(GlobalKey) runAddToCartAnimation;
+
+  final searchController = TextEditingController();
 
   void itemSelectedCartAnimations(GlobalKey gkImage) {
     runAddToCartAnimation(gkImage);
   }
 
   bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   final UtilsServices utilsServices = UtilsServices();
 
@@ -79,35 +76,58 @@ class _HomeTabState extends State<HomeTab> {
         child: Column(
           children: [
             //Campo de pesquisa
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 10,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  isDense: true,
-                  hintText: 'Pesquise aqui...',
-                  hintStyle: TextStyle(
-                    color: Colors.grey.shade400,
-                    fontSize: 14,
+            GetBuilder<HomeController>(
+              builder: (controller) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
                   ),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: CustomColors.customConstrastColor,
-                    size: 21,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(60),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
+                  child: TextFormField(
+                    controller: searchController,
+                    onChanged: (value) {
+                      controller.searchTitle.value = value;
+                    },
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      isDense: true,
+                      hintText: 'Pesquise aqui...',
+                      hintStyle: TextStyle(
+                        color: Colors.grey.shade400,
+                        fontSize: 14,
+                      ),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: CustomColors.customConstrastColor,
+                        size: 21,
+                      ),
+                      suffixIcon: controller.searchTitle.value.isNotEmpty
+                          ? IconButton(
+                              onPressed: () {
+
+                                searchController.clear();
+                                controller.searchTitle.value = '';
+                                FocusScope.of(context).unfocus();
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                color: CustomColors.customConstrastColor,
+                                size: 21,
+                              ),
+                            )
+                          : null,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(60),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
 
             // Categorias
@@ -171,11 +191,10 @@ class _HomeTabState extends State<HomeTab> {
                                   childAspectRatio: 9 / 11.5),
                           itemCount: controller.allProducts.length,
                           itemBuilder: (_, index) {
-
-                            if(((index + 1 )== controller.allProducts.length) && !controller.isLastPage){
-
-                            controller.loadMoreProducts();
-                               
+                            if (((index + 1) ==
+                                    controller.allProducts.length) &&
+                                !controller.isLastPage) {
+                              controller.loadMoreProducts();
                             }
 
                             return HomeItemTile(
