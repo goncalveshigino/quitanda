@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
+import 'package:quitanda/src/pages/base/controller/navigation_controller.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 import '../../models/item_model.dart';
@@ -18,6 +20,8 @@ class _ProsuctTabState extends State<ProsuctTab> {
   final UtilsServices utilsServices = UtilsServices();
 
   int cartItemQuantity = 1;
+
+  final navigationController = Get.find<NavigationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +96,11 @@ class _ProsuctTabState extends State<ProsuctTab> {
                     SizedBox(
                       height: 55,
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          navigationController
+                              .navigationPageView(NavigationTabs.cart);
+                        },
                         label: const Text(
                           'Adicionar no Carrinho',
                           style: TextStyle(

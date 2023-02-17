@@ -5,6 +5,8 @@ import 'package:quitanda/src/pages/base/base_screen.dart';
 import 'package:quitanda/src/pages/home/binding/home_binding.dart';
 import 'package:quitanda/src/pages/splash/splash_screen.dart';
 
+import '../pages/base/binding/navigation_binding.dart';
+
 abstract class AppPages {
 
   static final pages = <GetPage>[
@@ -25,6 +27,7 @@ abstract class AppPages {
       name: PagesRoutes.baseRoute,
       page: () => const BaseScreen(),
       bindings: [
+        NavigationBinding(),
         HomeBinding(),
       ],
     ),
