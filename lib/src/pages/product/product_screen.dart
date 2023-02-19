@@ -38,86 +38,87 @@ class _ProsuctTabState extends State<ProsuctTab> {
                 ),
               ),
               Expanded(
-                  child: Container(
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(50),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade600,
-                        offset: const Offset(0, 2),
+                child: Container(
+                  padding: const EdgeInsets.all(32),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(50),
                       ),
-                    ]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          widget.item.itemName,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontSize: 27, fontWeight: FontWeight.bold),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade600,
+                          offset: const Offset(0, 2),
                         ),
-                        const Spacer(),
-                        QauntityWidget(
-                          suffixText: widget.item.unit,
-                          value: cartItemQuantity,
-                          result: (quantity) {
-                            setState(() {
-                              cartItemQuantity = quantity;
-                            });
-                          },
-                        )
-                      ],
-                    ),
-                    Text(
-                      utilsServices.priceToCurrency(widget.item.price),
-                      style: TextStyle(
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold,
-                          color: CustomColors.customSwatchColor),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: SingleChildScrollView(
-                          child: Text(
-                            widget.item.description,
-                            style: const TextStyle(height: 1.5),
+                      ]),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            widget.item.itemName,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontSize: 27, fontWeight: FontWeight.bold),
+                          ),
+                          const Spacer(),
+                          QauntityWidget(
+                            suffixText: widget.item.unit,
+                            value: cartItemQuantity,
+                            result: (quantity) {
+                              setState(() {
+                                cartItemQuantity = quantity;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                      Text(
+                        utilsServices.priceToCurrency(widget.item.price),
+                        style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold,
+                            color: CustomColors.customSwatchColor),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: SingleChildScrollView(
+                            child: Text(
+                              widget.item.description,
+                              style: const TextStyle(height: 1.5),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 55,
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          navigationController
-                              .navigationPageView(NavigationTabs.cart);
-                        },
-                        label: const Text(
-                          'Adicionar no Carrinho',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                      SizedBox(
+                        height: 55,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            navigationController
+                                .navigationPageView(NavigationTabs.cart);
+                          },
+                          label: const Text(
+                            'Adicionar no Carrinho',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          icon: const Icon(
+                            Icons.shopping_cart_outlined,
+                            color: Colors.white,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15))),
                         ),
-                        icon: const Icon(
-                          Icons.shopping_cart_outlined,
-                          color: Colors.white,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ))
+              ),
             ],
           ),
           Positioned(

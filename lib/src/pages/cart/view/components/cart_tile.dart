@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:quitanda/src/pages/common_widgets/quantity_widget.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
-import '../../../config/custom_colors.dart';
-import '../../../models/cart_item_model.dart';
+import '../../../../config/custom_colors.dart';
+import '../../../../models/cart_item_model.dart';
+
+
 
 class CartTile extends StatefulWidget {
   
