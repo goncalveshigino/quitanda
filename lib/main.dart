@@ -5,6 +5,7 @@ import 'package:quitanda/src/pages_routes/app_pages.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  
   Get.put(AuthController());
   
   runApp(const MyApp());
@@ -13,7 +14,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
