@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/pages/base/controller/navigation_controller.dart';
+import 'package:quitanda/src/pages/cart/controller/cart_controller.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 import '../../models/item_model.dart';
@@ -22,6 +23,7 @@ class _ProsuctTabState extends State<ProsuctTab> {
   int cartItemQuantity = 1;
 
   final navigationController = Get.find<NavigationController>();
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +100,12 @@ class _ProsuctTabState extends State<ProsuctTab> {
                         child: ElevatedButton.icon(
                           onPressed: () {
                             Navigator.of(context).pop();
+
+                            cartController.addItemToCart(
+                              item: widget.item,
+                              quantaty: cartItemQuantity,
+                            );
+
                             navigationController
                                 .navigationPageView(NavigationTabs.cart);
                           },
