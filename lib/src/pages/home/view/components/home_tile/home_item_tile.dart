@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
+import 'package:quitanda/src/pages_routes/app_pages.dart';
 
 import '../../../../../models/item_model.dart';
 import '../../../../../services/utils_services.dart';
@@ -38,11 +40,7 @@ class _HomeItemTileState extends State<HomeItemTile> {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (c) {
-              return ProsuctTab(
-                item: widget.item,
-              );
-            }));
+            Get.toNamed(PagesRoutes.productRoute, arguments: widget.item);
           },
           child: Card(
             elevation: 5,

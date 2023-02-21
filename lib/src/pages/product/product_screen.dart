@@ -9,9 +9,12 @@ import '../../models/item_model.dart';
 import '../common_widgets/quantity_widget.dart';
 
 class ProsuctTab extends StatefulWidget {
-  final ItemModel item;
 
-  const ProsuctTab({Key? key, required this.item}) : super(key: key);
+  final ItemModel item = Get.arguments;
+
+  ProsuctTab({
+  Key? key, 
+  }) : super(key: key);
 
   @override
   State<ProsuctTab> createState() => _ProsuctTabState();
@@ -58,14 +61,16 @@ class _ProsuctTabState extends State<ProsuctTab> {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            widget.item.itemName,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                fontSize: 27, fontWeight: FontWeight.bold),
+                          Expanded(
+                            child: Text(
+                              widget.item.itemName,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 27, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          const Spacer(),
+                        
                           QauntityWidget(
                             suffixText: widget.item.unit,
                             value: cartItemQuantity,
@@ -103,7 +108,7 @@ class _ProsuctTabState extends State<ProsuctTab> {
 
                             cartController.addItemToCart(
                               item: widget.item,
-                              quantaty: cartItemQuantity,
+                              quantity: cartItemQuantity,
                             );
 
                             navigationController

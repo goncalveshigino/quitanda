@@ -4,6 +4,7 @@ import 'package:quitanda/src/pages/cart/result/cart_result.dart';
 import 'package:quitanda/src/services/http_manager.dart';
 
 class CartRepository {
+  
   final _httpManager = HttpManager();
 
   Future<CartResult<List<CartItemModel>>> getCartItems({
@@ -33,6 +34,30 @@ class CartRepository {
           'Ocorreu um erro ao recuperar os itens do carrinho');
     }
   }
+
+
+  Future<bool> changeItemQuantity({
+    required String token, 
+    required String cartItemId, 
+    required int quantity
+    }) async {
+   final result = await _httpManager.restRequest(
+      url: Endpoints.modifyItemQuantity,
+      method: HttpMethods.post,
+      body: {
+        'cartItemId': cartItemId,
+        'quantity': quantity
+      },
+      hearders: {
+        'X-Parse-Session-Token': token
+      }
+    );
+
+    return result.isEmpty;
+  }
+
+
+  
 
   Future<CartResult<String>> addItemToCart({
     required String userId,

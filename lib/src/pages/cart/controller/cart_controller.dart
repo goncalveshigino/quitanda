@@ -7,6 +7,7 @@ import 'package:quitanda/src/pages/cart/result/cart_result.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 class CartController extends GetxController {
+  
   final cartRepository = CartRepository();
   final authController = Get.find<AuthController>();
   final utilsServices = UtilsServices();
@@ -51,22 +52,49 @@ class CartController extends GetxController {
     );
   }
 
-  int getItemIndex(ItemModel item) {
-    return cartItems.indexWhere((itemInList) => itemInList.id == item.id);
+  Future<bool> changeItemQuantity({
+    required CartItemModel item,
+    required int quantity,
+  }) async {
+    final result = await cartRepository.changeItemQuantity(
+      token: authController.user.token!,
+      cartItemId: item.id,
+      quantity: quantity,
+    );
+
+    return result;
   }
 
+
+  int getItemIndex(ItemModel item) {
+    return cartItems.indexWhere((itemInList) => itemInList.item.id == item.id);
+  }
+
+
   Future<void> addItemToCart(
-      {required ItemModel item, int quantaty = 1}) async {
+      {required ItemModel item, int quantity = 1}) async {
     int itemIndex = getItemIndex(item);
 
     if (itemIndex >= 0) {
-      cartItems[itemIndex].quantity += quantaty;
+      final product = cartItems[itemIndex];
+
+      final result =
+          await changeItemQuantity(item: product, quantity: (product.quantity + quantity));
+
+      if (result) {
+        cartItems[itemIndex].quantity += quantity;
+      } else {
+        utilsServices.showToast(
+          message: 'Ocorreu um erro ao acessar a quantidade do produto',
+          isError: true,
+        );
+      }
     } else {
       final CartResult<String> result = await cartRepository.addItemToCart(
         userId: authController.user.id!,
         token: authController.user.token!,
         productId: item.id,
-        quantity: quantaty,
+        quantity: quantity,
       );
 
       result.when(
@@ -75,7 +103,7 @@ class CartController extends GetxController {
             CartItemModel(
               id: cartItemId,
               item: item,
-              quantity: quantaty,
+              quantity: quantity,
             ),
           );
         },
