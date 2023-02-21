@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
-import 'package:quitanda/src/models/cart_item_model.dart';
+
 import 'package:quitanda/src/pages/cart/controller/cart_controller.dart';
 import 'package:quitanda/src/pages/cart/view/components/cart_tile.dart';
 import 'package:quitanda/src/pages/common_widgets/payment_dialog.dart';
@@ -39,6 +39,22 @@ class _CartTabState extends State<CartTab> {
           Expanded(
             child: GetBuilder<CartController>(
               builder: (controller) {
+
+                if (controller.cartItems.isEmpty) {
+
+                  return Column(
+                    children: [
+                      Icon(
+                        Icons.remove_shopping_cart,
+                        size: 40,
+                        color: CustomColors.customSwatchColor,
+                      ),
+                     const Text('Nao ha item no carrinho'),
+                    ],
+                  );
+
+                }
+
                 return ListView.builder(
                   itemCount: controller.cartItems.length,
                   itemBuilder: (_, index) {

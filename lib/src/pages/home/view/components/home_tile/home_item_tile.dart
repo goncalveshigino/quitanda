@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
+import 'package:quitanda/src/pages/cart/controller/cart_controller.dart';
 import 'package:quitanda/src/pages_routes/app_pages.dart';
 
 import '../../../../../models/item_model.dart';
@@ -25,6 +26,7 @@ class _HomeItemTileState extends State<HomeItemTile> {
   final GlobalKey imageGk = GlobalKey();
 
   final UtilsServices utilsServices = UtilsServices();
+  final cartController = Get.find<CartController>();
 
   IconData tileIcon = Icons.add_shopping_cart_outlined;
 
@@ -105,6 +107,8 @@ class _HomeItemTileState extends State<HomeItemTile> {
                 child: InkWell(
                   onTap: () {
                     switchIcon();
+
+                    cartController.addItemToCart(item: widget.item);
 
                     widget.cartAnimationMethod(imageGk);
                   },
