@@ -33,7 +33,7 @@ class OrderTile extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               Text(
-                utilsServices.formatDateTime(order.createdDateTime),
+                utilsServices.formatDateTime(order.createdDateTime!),
                 style: const TextStyle(fontSize: 12, color: Colors.black),
               ),
             ],

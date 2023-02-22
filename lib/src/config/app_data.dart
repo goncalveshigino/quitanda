@@ -51,7 +51,7 @@ ItemModel mango = ItemModel(
 ItemModel papaya = ItemModel(
   imgUrl: 'assets/fruits/papaya.png',
   itemName: 'Mamão papaya',
-  price: 8,
+  price: 0.81,
   unit: 'kg',
   description:
       'O melhor mamão da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
@@ -100,38 +100,38 @@ UserModel user = UserModel(
 
 List<OrderModel> orders = [
 
-  OrderModel(
-      copyAndPaste: 'gsfst2t367gh',
-      createdDateTime: DateTime.parse(
-        '2022-06-08 20:20:10.435',
-      ),
-      overdueDateTime: DateTime.parse(
-        '2022-06-08 21:30:30.463'
-      ),
-      id: 'ggfuwswgw57hgc',
-      status: 'pending_payment',
-      total: 11.0,
-      items: [
-        // CartItemModel(
-        //   item: apple,
-        //   quantity: 2,
-        // ),
-  ]),
-  OrderModel(
-      copyAndPaste: 'gsfst2t367gh',
-      createdDateTime: DateTime.parse(
-        '2023-06-08 20:20:10.435',
-      ),
-      overdueDateTime: DateTime.parse(
-        '2023-06-08 21:30:30.463'
-      ),
-      id: 'ggfuwswgw57hgc',
-      status: 'delivered',
-      total: 11.0,
-      items: [
-        // CartItemModel(
-        //   item: mango,
-        //   quantity: 2,
-        // ),
-  ]),
+  // OrderModel(
+  //     copyAndPaste: 'gsfst2t367gh',
+  //     createdDateTime: DateTime.parse(
+  //       '2022-06-08 20:20:10.435',
+  //     ),
+  //     overdueDateTime: DateTime.parse(
+  //       '2022-06-08 21:30:30.463'
+  //     ),
+  //     id: 'ggfuwswgw57hgc',
+  //     status: 'pending_payment',
+  //     total: 11.0,
+  //     items: [
+  //       // CartItemModel(
+  //       //   item: apple,
+  //       //   quantity: 2,
+  //       // ),
+  // ]),
+  // OrderModel(
+  //     copyAndPaste: 'gsfst2t367gh',
+  //     createdDateTime: DateTime.parse(
+  //       '2023-06-08 20:20:10.435',
+  //     ),
+  //     overdueDateTime: DateTime.parse(
+  //       '2023-06-08 21:30:30.463'
+  //     ),
+  //     id: 'ggfuwswgw57hgc',
+  //     status: 'delivered',
+  //     total: 11.0,
+  //     items: [
+  //       // CartItemModel(
+  //       //   item: mango,
+  //       //   quantity: 2,
+  //       // ),
+  // ]),
 ];

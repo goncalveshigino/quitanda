@@ -1,18 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quitanda/src/models/cart_item_model.dart';
 import 'package:quitanda/src/models/item_model.dart';
+import 'package:quitanda/src/models/order_model.dart';
 import 'package:quitanda/src/pages/auth/controller/auth_controller.dart';
 import 'package:quitanda/src/pages/cart/repository/cart_repository.dart';
 import 'package:quitanda/src/pages/cart/result/cart_result.dart';
+import 'package:quitanda/src/pages/common_widgets/payment_dialog.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 class CartController extends GetxController {
-
   final cartRepository = CartRepository();
   final authController = Get.find<AuthController>();
   final utilsServices = UtilsServices();
 
   List<CartItemModel> cartItems = [];
+
+  bool isCheckoutLoading = false;
 
   @override
   void onInit() {
@@ -51,7 +55,6 @@ class CartController extends GetxController {
       },
     );
   }
-  
 
   Future<bool> changeItemQuantity({
     required CartItemModel item,
@@ -63,40 +66,28 @@ class CartController extends GetxController {
       quantity: quantity,
     );
 
-    
-    if(result){
-
-      if(quantity == 0){
-
-         cartItems.removeWhere((cartItem) => cartItem.id == item.id);
-
-      }else{
-
-        cartItems.firstWhere((cartItem) => cartItem.id == item.id).quantity = quantity;
-
+    if (result) {
+      if (quantity == 0) {
+        cartItems.removeWhere((cartItem) => cartItem.id == item.id);
+      } else {
+        cartItems.firstWhere((cartItem) => cartItem.id == item.id).quantity =
+            quantity;
       }
 
       update();
-
-    } else{
-
-       utilsServices.showToast(
-          message: 'Ocorreu um erro ao acessar a quantidade do produto',
-          isError: true,
-        );
-
+    } else {
+      utilsServices.showToast(
+        message: 'Ocorreu um erro ao acessar a quantidade do produto',
+        isError: true,
+      );
     }
-
-
 
     return result;
   }
 
-
   int getItemIndex(ItemModel item) {
     return cartItems.indexWhere((itemInList) => itemInList.item.id == item.id);
   }
-
 
   Future<void> addItemToCart(
       {required ItemModel item, int quantity = 1}) async {
@@ -105,8 +96,8 @@ class CartController extends GetxController {
     if (itemIndex >= 0) {
       final product = cartItems[itemIndex];
 
-      await changeItemQuantity(item: product, quantity: (product.quantity + quantity));
-
+      await changeItemQuantity(
+          item: product, quantity: (product.quantity + quantity));
     } else {
       final CartResult<String> result = await cartRepository.addItemToCart(
         userId: authController.user.id!,
@@ -135,5 +126,43 @@ class CartController extends GetxController {
     }
 
     update();
+  }
+
+  void setCheckoutLoading(bool value) {
+    isCheckoutLoading = value;
+    update();
+  }
+
+  Future checkoutCart() async {
+
+    setCheckoutLoading(true);
+
+    CartResult<OrderModel> result = await cartRepository.checkoutCart(
+      token: authController.user.token!,
+      total: cartITotalPrice(),
+    );
+
+    setCheckoutLoading(false);
+
+    result.when(
+      success: (order) {
+        cartItems.clear();
+        update();
+
+        showDialog(
+          context: Get.context!,
+          builder: (_) {
+            return PaymentDialog(
+              order: order,
+            );
+          },
+        );
+      },
+      error: (message) {
+        utilsServices.showToast(
+          message: message,
+        );
+      },
+    );
   }
 }

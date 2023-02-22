@@ -17,6 +17,7 @@ class CartTab extends StatefulWidget {
 
 class _CartTabState extends State<CartTab> {
   final UtilsServices utilsServices = UtilsServices();
+  final cartController = Get.find<CartController>();
 
   double cartTotalPrice() {
     // double total = 0.0;
@@ -39,20 +40,18 @@ class _CartTabState extends State<CartTab> {
           Expanded(
             child: GetBuilder<CartController>(
               builder: (controller) {
-
                 if (controller.cartItems.isEmpty) {
-
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.remove_shopping_cart,
                         size: 40,
                         color: CustomColors.customSwatchColor,
                       ),
-                     const Text('Nao ha item no carrinho'),
+                      const Text('Nao ha item no carrinho'),
                     ],
                   );
-
                 }
 
                 return ListView.builder(
@@ -104,33 +103,37 @@ class _CartTabState extends State<CartTab> {
                 ),
                 SizedBox(
                   height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                    ),
-                    onPressed: () async {
-                      bool? result = await showOrderConfirmation();
+                  child: GetBuilder<CartController>(
+                    builder: (controller) {
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                        ),
+                        onPressed: controller.isCheckoutLoading
+                            ? null
+                            : () async {
+                                bool? result = await showOrderConfirmation();
 
-                      if (result ?? false) {
-                        showDialog(
-                          context: context,
-                          builder: (_) {
-                            return PaymentDialog(order: appData.orders.first);
-                          },
-                        );
-                      } else {
-                        utilsServices.showToast(
-                            message: 'Pedido nao confirmado', isError: true);
-                      }
+                                if (result ?? false) {
+                                  cartController.checkoutCart();
+                                } else {
+                                  utilsServices.showToast(
+                                    message: 'Pedido nao confirmado',
+                                  );
+                                }
+                              },
+                        child: controller.isCheckoutLoading
+                            ? const CircularProgressIndicator()
+                            : const Text(
+                                'Concluir pedido',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                      );
                     },
-                    child: const Text(
-                      'Concluir pedido',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
                   ),
                 ),
               ],
