@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -26,8 +27,8 @@ class UtilsServices {
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 3,
-      //backgroundColor: isError ? Colors.red : Colors.white,
-      //textColor: isError ? Colors.white : Colors.black,
+      backgroundColor: isError ? Colors.red : Colors.white,
+      textColor: isError ? Colors.white : Colors.black,
       fontSize: 14,
     );
   }

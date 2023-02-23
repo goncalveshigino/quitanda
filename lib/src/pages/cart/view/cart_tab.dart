@@ -78,65 +78,70 @@ class _CartTabState extends State<CartTab> {
                     spreadRadius: 2,
                   )
                 ]),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'Total geral',
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-                GetBuilder<CartController>(
-                  builder: (controller) {
-                    return Text(
-                      utilsServices.priceToCurrency(
-                        controller.cartITotalPrice(),
-                      ),
+            child: GetBuilder<CartController>(
+              builder: (controller) {
+                return controller.cartItems.isEmpty ? Container() : Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      'Total geral',
                       style: TextStyle(
-                        fontSize: 23,
-                        color: CustomColors.customSwatchColor,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
                       ),
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: 50,
-                  child: GetBuilder<CartController>(
-                    builder: (controller) {
-                      return ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
+                    ),
+                    GetBuilder<CartController>(
+                      builder: (controller) {
+                        return Text(
+                          utilsServices.priceToCurrency(
+                            controller.cartITotalPrice(),
                           ),
-                        ),
-                        onPressed: controller.isCheckoutLoading
-                            ? null
-                            : () async {
-                                bool? result = await showOrderConfirmation();
-
-                                if (result ?? false) {
-                                  cartController.checkoutCart();
-                                } else {
-                                  utilsServices.showToast(
-                                    message: 'Pedido nao confirmado',
-                                  );
-                                }
-                              },
-                        child: controller.isCheckoutLoading
-                            ? const CircularProgressIndicator()
-                            : const Text(
-                                'Concluir pedido',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: CustomColors.customSwatchColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: GetBuilder<CartController>(
+                        builder: (controller) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
                               ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+                            ),
+                            onPressed: controller.isCheckoutLoading
+                                ? null
+                                : () async {
+                                    bool? result =
+                                        await showOrderConfirmation();
+
+                                    if (result ?? false) {
+                                      cartController.checkoutCart();
+                                    } else {
+                                      utilsServices.showToast(
+                                        message: 'Pedido nao confirmado',
+                                      );
+                                    }
+                                  },
+                            child: controller.isCheckoutLoading
+                                ? const CircularProgressIndicator()
+                                : const Text(
+                                    'Concluir pedido',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           )
         ],
