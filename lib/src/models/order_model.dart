@@ -7,9 +7,8 @@ part 'order_model.g.dart';
 
 @JsonSerializable()
 class OrderModel {
-
   String id;
-  
+
   @JsonKey(name: 'createdAt')
   DateTime? createdDateTime;
 
@@ -26,18 +25,20 @@ class OrderModel {
   String copyAndPaste;
   double total;
 
-  OrderModel({
-    required this.id,
-    required this.createdDateTime,
-    required this.overdueDateTime,
-    required this.items,
-    required this.status,
-    required this.qrCodeImage,
-    required this.copyAndPaste,
-    required this.total
-  });
+  bool get isOverDue => overdueDateTime.isBefore(DateTime.now());
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) => _$OrderModelFromJson(json);
+  OrderModel(
+      {required this.id,
+      required this.createdDateTime,
+      required this.overdueDateTime,
+      required this.items,
+      required this.status,
+      required this.qrCodeImage,
+      required this.copyAndPaste,
+      required this.total});
+
+  factory OrderModel.fromJson(Map<String, dynamic> json) =>
+      _$OrderModelFromJson(json);
   Map<String, dynamic> toJson() => _$OrderModelToJson(this);
 
   @override
