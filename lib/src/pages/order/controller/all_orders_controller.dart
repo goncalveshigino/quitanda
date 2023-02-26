@@ -6,7 +6,6 @@ import 'package:quitanda/src/pages/order/result/orders_result.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 class AllOrdersController extends GetxController {
-
   
   List<OrderModel> allOrders = [];
   final ordersRepository = OrdersRepository();
@@ -28,7 +27,10 @@ class AllOrdersController extends GetxController {
 
     result.when(
       success: (orders) {
-        allOrders = orders;
+        allOrders = orders
+          ..sort(
+            (a, b) => b.createdDateTime!.compareTo(a.createdDateTime!),
+          );
         update();
       },
       error: (message) {

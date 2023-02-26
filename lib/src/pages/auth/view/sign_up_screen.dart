@@ -114,7 +114,7 @@ class SignUpScreen extends StatelessWidget {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(18))),
-                                  onPressed: authContoller.isLoadin.value
+                                  onPressed: authContoller.isLoading.value
                                       ? null
                                       : () {
                                           FocusScope.of(context).unfocus();
@@ -127,7 +127,7 @@ class SignUpScreen extends StatelessWidget {
                                             print(authContoller.user);
                                           }
                                         },
-                                  child: authContoller.isLoadin.value
+                                  child: authContoller.isLoading.value
                                       ? const CircularProgressIndicator()
                                       : const Text(
                                           'Cadastrar usuário',

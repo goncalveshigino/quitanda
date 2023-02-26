@@ -7,7 +7,7 @@ import 'package:quitanda/src/pages_routes/app_pages.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 class AuthController extends GetxController {
-  RxBool isLoadin = false.obs;
+  RxBool isLoading = false.obs;
 
   final authRepository = AuthRepository();
   final UtilsServices utilsServices = UtilsServices();
@@ -59,14 +59,12 @@ class AuthController extends GetxController {
     Get.offAllNamed(PagesRoutes.signInRoute);
   }
 
-
   Future<void> signUp() async {
-
-    isLoadin.value = true;
+    isLoading.value = true;
 
     AuthResult result = await authRepository.signUp(user);
 
-    isLoadin.value = false;
+    isLoading.value = false;
 
     result.when(
       success: (user) {
@@ -75,10 +73,7 @@ class AuthController extends GetxController {
         saveTokenAndProceedToBase();
       },
       error: (message) {
-        utilsServices.showToast(
-          message: message,
-          isError: true
-        );
+        utilsServices.showToast(message: message, isError: true);
       },
     );
   }
@@ -87,12 +82,12 @@ class AuthController extends GetxController {
     required String email,
     required String password,
   }) async {
-    isLoadin.value = true;
+    isLoading.value = true;
 
     AuthResult result =
         await authRepository.signIn(email: email, password: password);
 
-    isLoadin.value = false;
+    isLoading.value = false;
 
     result.when(
       success: (user) {
@@ -110,5 +105,36 @@ class AuthController extends GetxController {
 
   Future<void> resetPassword(String email) async {
     await authRepository.resetPassword(email);
+  }
+
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    
+    isLoading.value = true;
+
+    final result = await authRepository.changePassword(
+      email: user.email!,
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+      token: user.token!,
+    );
+
+    isLoading.value = false;
+
+    if (result) {
+
+      utilsServices.showToast(
+        message: 'A senha foi atualizada com sucesso!',
+      );
+      signOut();
+
+    } else {
+      utilsServices.showToast(
+        message: 'A senha atual esta incorreta',
+        isError: true,
+      );
+    }
   }
 }

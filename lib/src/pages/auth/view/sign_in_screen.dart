@@ -101,7 +101,7 @@ class SignInScreen extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18))),
-                            onPressed: authController.isLoadin.value
+                            onPressed: authController.isLoading.value
                                 ? null
                                 : () {
                                     FocusScope.of(context).unfocus();
@@ -116,7 +116,7 @@ class SignInScreen extends StatelessWidget {
 
                                     // Get.offNamed(PagesRoutes.baseRoute);
                                   },
-                            child: authController.isLoadin.value
+                            child: authController.isLoading.value
                                 ? const CircularProgressIndicator(
                                     valueColor:
                                         AlwaysStoppedAnimation(Colors.white),

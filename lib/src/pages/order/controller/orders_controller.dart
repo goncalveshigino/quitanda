@@ -7,6 +7,7 @@ import 'package:quitanda/src/pages/order/result/orders_result.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 class OrderController extends GetxController {
+  
   OrderModel order;
 
   OrderController(this.order);
