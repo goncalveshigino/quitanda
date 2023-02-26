@@ -5,7 +5,10 @@ import 'package:quitanda/src/pages/auth/result/auth_result.dart';
 import '../../../models/user_model.dart';
 import '../../../services/http_manager.dart';
 
-class AuthRepository {
+
+
+class AuthRepository  {
+  
   final HttpManager _httpManager = HttpManager();
 
   AuthResult handleuUserOrError(Map<dynamic, dynamic> result) {
@@ -63,7 +66,7 @@ class AuthRepository {
     required String newPassword,
     required String token,
   }) async {
-   final result = await _httpManager.restRequest(
+    final result = await _httpManager.restRequest(
       url: Endpoints.changePassword,
       method: HttpMethods.post,
       body: {

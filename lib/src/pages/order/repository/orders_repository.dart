@@ -4,7 +4,12 @@ import 'package:quitanda/src/models/order_model.dart';
 import 'package:quitanda/src/pages/order/result/orders_result.dart';
 import 'package:quitanda/src/services/http_manager.dart';
 
+
+
+
+
 class OrdersRepository {
+  
   final _httpManager = HttpManager();
 
   Future<OrdersResult<List<OrderModel>>> getAllOrders({

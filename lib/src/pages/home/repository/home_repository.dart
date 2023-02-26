@@ -4,6 +4,8 @@ import 'package:quitanda/src/models/item_model.dart';
 import 'package:quitanda/src/pages/home/result/home_result.dart';
 import 'package:quitanda/src/services/http_manager.dart';
 
+
+
 class HomeRepository {
   final _httpManager = HttpManager();
 

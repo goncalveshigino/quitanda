@@ -5,7 +5,9 @@ import 'package:quitanda/src/pages/cart/result/cart_result.dart';
 import 'package:quitanda/src/services/http_manager.dart';
 
 class CartRepository {
+
   final _httpManager = HttpManager();
+  
 
   Future<CartResult<List<CartItemModel>>> getCartItems({
     required String token,

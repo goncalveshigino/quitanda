@@ -9,6 +9,7 @@ import '../../../../models/order_model.dart';
 import 'order_status_widgets.dart';
 
 class OrderTile extends StatelessWidget {
+
   OrderTile({
     Key? key,
     required this.order,
@@ -25,7 +26,7 @@ class OrderTile extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: GetBuilder<OrderController>(
-          init: OrderController(order),
+         init: OrderController(order),
           global: false,
           builder: (controller) {
             return ExpansionTile(

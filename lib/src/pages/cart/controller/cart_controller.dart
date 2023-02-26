@@ -10,7 +10,10 @@ import 'package:quitanda/src/pages/common_widgets/payment_dialog.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 class CartController extends GetxController {
+
+
   final cartRepository = CartRepository();
+  
   final authController = Get.find<AuthController>();
   final utilsServices = UtilsServices();
 
